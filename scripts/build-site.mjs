@@ -2,7 +2,7 @@ import fs from "node:fs"; import path from "node:path";
 import { buildHtml } from "../lib/build.mjs";
 const out = process.argv[2] || "dist/site";
 // Small Home button injected into every flipbook page (demos + upload template).
-const homeBtn = '<style>.t{padding-left:96px}</style><a href="/" aria-label="Back to homepage" style="position:fixed;top:14px;left:10px;z-index:9999;display:inline-block;padding:8px 12px;font:14px/1 Georgia,serif;color:#5a4a2a;background:rgba(243,234,210,.92);border:1px solid #c9a227;border-radius:20px;text-decoration:none">&larr; Home</a>';
+const homeBtn = '<style>.t{padding-left:96px}.bookee-home:focus-visible{outline:2px solid #5a4a2a;outline-offset:3px}@media(max-width:360px){.bookee-home{top:64px!important}}</style><a class="bookee-home" href="https://bookee-iota.vercel.app/" aria-label="Back to homepage" style="position:fixed;top:10px;left:10px;z-index:9999;display:inline-block;padding:14px 12px;font:14px/1 Georgia,serif;color:#5a4a2a;background:rgba(243,234,210,.92);border:1px solid #c9a227;border-radius:20px;text-decoration:none">&larr; Home</a>';
 const withHome = (html) => html.replace("</body></html>", homeBtn + "</body></html>");
 fs.rmSync(out, { recursive: true, force: true }); fs.mkdirSync(path.join(out, "assets/fonts"), { recursive: true });
 fs.copyFileSync("site-src/index.html", path.join(out, "index.html"));
