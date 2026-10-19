@@ -1,7 +1,16 @@
 {
   "name": "bookee",
-  "interface": { "displayName": "Bookee" },
+  "interface": {
+    "displayName": "Bookee"
+  },
   "plugins": [
-    { "name": "bookee", "source": "./", "description": "Interview, plan, write, typeset and verify ebooks, adventures and flipbook proposals." }
-  ]
+    {
+      "name": "bookee",
+      "source": "./",
+      "description": "Interview, plan, write, typeset and verify ebooks, adventures and flipbook proposals."
+    }
+  ],
+  "owner": {
+    "name": "thepaulieffect"
+  }
 }

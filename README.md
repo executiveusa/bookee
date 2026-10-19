@@ -54,3 +54,6 @@ later does typeset, narration and hosting. Title cards and animated intros:
 
 Landing page: `node scripts/build-site.mjs dist/site`.
 See AGENTS.md for the working agreement.
+
+---
+Built by thepaulieffect 2026
