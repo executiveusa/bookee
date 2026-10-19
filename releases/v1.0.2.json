@@ -1,0 +1,22 @@
+{
+  "version": "1.0.2",
+  "kind": "patch",
+  "date": "2026-10-19",
+  "artifact_commit": "0801476c34814575a2f633f83b5b0be52c01e301",
+  "production_url": "https://bookee-iota.vercel.app/",
+  "deployment_id": "C6uE9i6tkzaED2cWwkw4gf8h3hFr",
+  "deployment_url": "https://bookee-kvobasto7-the-pauli-effect.vercel.app",
+  "deployment_receipt": "https://vercel.com/the-pauli-effect/bookee/C6uE9i6tkzaED2cWwkw4gf8h3hFr",
+  "rollback_commit": "45da5cf6aa21cf49fea89d5ccd2a7fe1eec4f878",
+  "rollback_artifact_commit": "505773189324c2f63e6e293daf6faac53a1b33eb",
+  "rollback_deployment_id": "EqibiB4jWqAsRqB1qszDGAZ97B9W",
+  "verification": [
+    "npm test: 5 passed including no-node_modules isolated payload, all three types",
+    "Codex CLI 0.156.0 and 0.163.0 fresh HOME: real executiveusa/bookee GitHub marketplace add + bookee@bookee install; cached plugin has no node_modules; --version/check/build work for all three samples",
+    "Codex 0.156 clean install: new adventure path check/build and all three sample Kindle exports passed",
+    "EPUBCheck 5.1.0: all 3 exports, 0 fatal/error/warning",
+    "Production Chrome at 390 and 1440: footer v1.0.2, proposal Contents 7 items, Home visible, zero page errors; screenshots inspected"
+  ],
+  "independent_review": "awaiting round-3 rerun",
+  "robots_txt": "Disallow all preserved pending owner decision"
+}
