@@ -1,0 +1,11 @@
+{
+  "name": "bookee",
+  "owner": { "name": "thepaulieffect" },
+  "plugins": [
+    {
+      "name": "bookee",
+      "source": "./",
+      "description": "Say what you do, get a finished book - adventures, guides, and proposals as beautiful flipbooks."
+    }
+  ]
+}
