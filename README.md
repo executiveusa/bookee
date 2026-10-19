@@ -57,3 +57,7 @@ See AGENTS.md for the working agreement.
 
 ---
 Built by thepaulieffect 2026
+
+## Kindle (KDP) export
+
+`bookmaker export kindle my-book --out dist` writes a folder with a KDP-ready reflowable EPUB 3 (epubcheck-clean), a marketing cover at Amazon's spec (2560 x 1600 px JPEG, RGB, 300 DPI), and a publish sheet with the steps. KDP upload happens in your own KDP account - Bookee does not publish for you. Format rules follow Amazon's current pages: accepted formats (kdp.amazon.com/help/topic/G200634390), cover guidelines (kdp.amazon.com/help/topic/G6GTK3T3NUHKLEFX).
