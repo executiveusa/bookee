@@ -1,11 +1,14 @@
 {
   "name": "bookee",
-  "owner": { "name": "thepaulieffect" },
+  "owner": {
+    "name": "thepaulieffect"
+  },
   "plugins": [
     {
       "name": "bookee",
       "source": "./",
       "description": "Say what you do, get a finished book - adventures, guides, and proposals as beautiful flipbooks."
     }
-  ]
+  ],
+  "description": "Bookee - say what you do, get a finished book. Adventures, guides, and proposals as beautiful flipbooks."
 }
