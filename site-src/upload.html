@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Turn your PDF or EPUB into a book - Bookee</title>
+<style>
+@font-face{font-family:"Bodoni Moda";src:url(../assets/fonts/bodoni-moda-latin-700-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Newsreader";src:url(../assets/fonts/newsreader-latin-400-normal.woff2) format("woff2");font-display:swap}
+:root{--paper:#f3ead2;--ink:#241a12;--wine:#7a1f2f;--gold:#c9a227;--d:"Bodoni Moda",serif;--t:"Newsreader",serif}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--t);font-size:18px;line-height:1.6}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;border-bottom:1px solid #d8ccb0}
+header a.mark{font-family:var(--d);font-size:24px;color:var(--ink);text-decoration:none}
+header nav a{color:var(--ink);text-decoration:none;margin-left:22px;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+main{max-width:760px;margin:0 auto;padding:48px 5vw 90px}
+h1{font-family:var(--d);font-size:clamp(34px,5vw,52px);line-height:1.08;margin-bottom:14px}
+h1 em{color:var(--wine)}
+p.lede{font-size:20px;margin-bottom:8px}
+.privacy{display:inline-block;margin:14px 0 30px;padding:8px 14px;border:1px solid var(--gold);border-radius:4px;font-size:15px;background:#f8f1dd}
+#drop{border:2px dashed var(--wine);border-radius:10px;padding:56px 24px;text-align:center;cursor:pointer;background:#faf3e0;transition:background .2s}
+#drop.over{background:#f1e3c2}
+#drop b{font-family:var(--d);font-size:24px;display:block;margin-bottom:8px}
+#drop span{color:#6d5c44;font-size:15px}
+#status{margin:18px 0;font-size:16px;color:var(--wine);min-height:24px}
+#step2{display:none;margin-top:26px}
+label{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#6d5c44;margin:14px 0 4px}
+input[type=text]{width:100%;padding:10px 12px;font-family:var(--t);font-size:17px;border:1px solid #cdbf9e;border-radius:4px;background:#fffdf6}
+#preview{list-style:none;padding:0;margin:18px 0;max-height:260px;overflow:auto;border:1px solid #e0d4b4;border-radius:6px;background:#fffdf6}
+#preview li{padding:8px 14px;border-bottom:1px solid #eee2c4;font-size:15px;display:flex;justify-content:space-between}
+#preview li span{color:#8a7a5e}
+#make{background:var(--wine);color:var(--paper);border:0;font-family:var(--d);font-size:18px;padding:14px 34px;border-radius:4px;cursor:pointer;letter-spacing:.06em}
+.note{margin-top:26px;font-size:14px;color:#6d5c44}
+.note code{background:#ece0bf;padding:1px 6px;border-radius:3px}
+</style></head>
+<body>
+<header><a class="mark" href="/">Bookee</a><nav><a href="/">Home</a></nav></header>
+<main>
+<h1>Your file, <em>a finished book.</em></h1>
+<p class="lede">Drop a PDF or EPUB. Get a Bookee flipbook that turns pages on a phone, ready to send as a single file.</p>
+<p class="privacy">Private by design: the conversion runs entirely in this browser. Your file is never uploaded, never stored, never seen by us.</p>
+<div id="drop"><b>Drop your PDF or EPUB here</b><span>or tap to choose a file - up to 25 MB</span></div>
+<input type="file" id="file" accept=".pdf,.epub" style="display:none">
+<p id="status"></p>
+<div id="step2">
+<label for="title-in">Book title</label>
+<input type="text" id="title-in">
+<label for="author-in">Author</label>
+<input type="text" id="author-in">
+<label>Sections found</label>
+<ol id="preview"></ol>
+<button id="make">Make my book</button>
+<p class="note">Want full control - chapter plans, your own pictures, a Kindle-ready EPUB for KDP? That is the free plugin: <code>/plugin marketplace add executiveusa/bookee</code> then <code>/plugin install bookee</code> in Claude Code, or <code>codex plugin marketplace add</code> the repo in Codex.</p>
+</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="upload.js"></script>
+</body></html>
