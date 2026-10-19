@@ -1,0 +1,15 @@
+{
+  "version": "1.0.1",
+  "kind": "patch",
+  "date": "2026-10-19",
+  "artifact_commit": "505773189324c2f63e6e293daf6faac53a1b33eb",
+  "production_url": "https://bookee-iota.vercel.app/",
+  "deployment_id": "EqibiB4jWqAsRqB1qszDGAZ97B9W",
+  "deployment_url": "https://bookee-82pce2gyk-the-pauli-effect.vercel.app",
+  "deployment_receipt": "https://vercel.com/the-pauli-effect/bookee/EqibiB4jWqAsRqB1qszDGAZ97B9W",
+  "rollback_commit": "ed33a121f899399235df552e1906a758f9992bf1",
+  "rollback_deployment_id": "AtVjnECbaQf9Vo4arT2DVodkU7sf",
+  "verification": ["npm test: 4 passed", "epubcheck: new adventure and all 3 samples, 0 fatal/error/warning", "production browser: mobile and desktop reader, contents, resume, navigation, upload success and invalid-file reset"],
+  "independent_review": "awaiting rerun",
+  "robots_txt": "Disallow all preserved pending owner decision"
+}
