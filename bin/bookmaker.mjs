@@ -7,6 +7,7 @@ import { validateInk } from "../lib/validate.mjs";
 import { lintGuide, lintAdventure } from "../lib/lint.mjs";
 import { plan } from "../lib/outline.mjs";
 import { loadProposal, checkProposal } from "../lib/proposal.mjs";
+if (process.argv.includes("--version")) { console.log("bookee 1.0.1"); process.exit(0); }
 const [cmd, ...rest] = process.argv.slice(2);
 const flag = (n, d) => { const i = rest.indexOf("--" + n); return i >= 0 ? rest[i + 1] : d; };
 const target = rest.find((a, i) => !a.startsWith("--") && !(rest[i - 1] || "").startsWith("--"));
@@ -36,7 +37,7 @@ if (cmd === "plan") {
     }, null, 2) + "\n");
   } else if (kind === "adventure") {
     fs.writeFileSync(path.join(target, "book.json"), JSON.stringify({ title, subtitle: "", author: "", slots: true }, null, 2) + "\n");
-    fs.writeFileSync(path.join(target, "story.ink"), `VAR seen = 0\n=== start ===\n# image: cover\nWrite the first page here.\n+ [First choice] -> ending_one\n+ [Second choice] -> ending_one\n=== ending_one ===\n# ending: The first ending\nWrite the ending here.\n-> END\n`);
+    fs.writeFileSync(path.join(target, "story.ink"), `VAR seen = 0\n-> start\n=== start ===\n# image: cover\nWrite the first page here.\n+ [First choice] -> ending_one\n+ [Second choice] -> ending_one\n=== ending_one ===\n# ending: The first ending\nWrite the ending here.\n-> END\n`);
   } else {
     fs.writeFileSync(path.join(target, "book.md"), `---\ntitle: ${title}\nsubtitle: \nauthor: \n---\n\n# Who this is for\n\n# What goes wrong\n\n# Your method\n\n# About the author\n`);
   }
@@ -64,6 +65,7 @@ if (cmd === "plan") {
     book.slots.forEach((s) => console.log(`  ${s.filled ? "filled " : "EMPTY  "} ${s.kind} ${s.id}${s.filled ? "" : "   -> drop art/" + s.id + ".jpg|png|svg"}`));
   } else {
     console.log(`guide: ${book.chapters.length} chapters, ${book.chapters.reduce((a, c) => a + c.words, 0)} words`);
+    if (book.chapters.some(c => c.words === 0)) { console.log("incomplete: empty chapters must be filled before build/export"); bad = 1; }
     const l = lintGuide(book.chapters); l.forEach((x) => console.log("lint:", x.where, "-", x.note));
     if (!l.length) console.log("lint: nothing to report");
   }
@@ -73,15 +75,17 @@ if (cmd === "plan") {
   const sub = rest.slice(1);
   const dir = sub.find((a, i) => !a.startsWith("--") && !(sub[i - 1] || "").startsWith("--"));
   if (!dir) { console.log(usage); process.exit(1); }
-  const r = exportKindle(dir, flag("out", "dist"));
+  let r; try { r = exportKindle(dir, flag("out", "dist")); } catch (e) { console.error("Kindle export: " + e.message); process.exit(1); }
   console.log(`kindle export -> ${r.epubPath} (${r.chapters} chapters, cover.jpg + KINDLE-PUBLISH.txt)`);
   process.exit(0);
 }
 if (cmd === "build") {
   if (!target) { console.log(usage); process.exit(1); }
   const out = flag("out", "dist");
+  const draft = fs.existsSync(path.join(target, "book.md")) ? loadBook(target) : null;
+  if (draft && draft.chapters.some(c => c.words === 0)) { console.error("Cannot build: fill the empty guide chapters first (run check for details)."); process.exit(1); }
   const { html, model } = buildHtml(target);
   const dir = path.join(out, model.id); fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), html);
   console.log(`built ${path.join(dir, "index.html")} (${(html.length / 1024).toFixed(0)} KB, ${model.mode})`);
-} else { console.log(usage); }
+} else if (!["plan", "new"].includes(cmd)) { console.log(usage); process.exit(cmd ? 1 : 0); }

@@ -2,7 +2,7 @@
 id: sourdough-weekend
 title: The Sourdough Weekend
 subtitle: A pocket guide to your first real loaf
-author: Sample Author
+author: Bookee sample
 backline: Sample book. Made with Bookee.
 ---
 

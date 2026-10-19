@@ -128,7 +128,7 @@ footer{padding:48px var(--gut) 64px;border-top:1px solid var(--ink);display:flex
  .steps{grid-template-columns:1fr}.step,.step+.step{padding:24px 0;border-right:0;border-bottom:1px solid var(--rule)}
  .std{columns:1}
  .plan,.plan+.plan{padding:28px 0;border-left:0}.plan+.plan{border-top:1px solid var(--rule)}
- .nav a.l{display:none}
+ .nav a.l{font-size:11px;letter-spacing:.04em}.nav{flex-wrap:wrap;gap:14px}
  .deskwrap::before{inset:-14px -14px -14px 20px}
  .frame,.cap{margin-left:0;margin-right:auto;width:min(100%,420px)}
 }
@@ -151,7 +151,7 @@ footer{padding:48px var(--gut) 64px;border-top:1px solid var(--ink);display:flex
     <div class="cta"><a class="btn" href="#start">Make my first book</a><a class="btn" href="/upload/" style="background:transparent;border:1px solid var(--wine);color:var(--wine);margin-left:12px">Have a PDF? Make it a book</a><span class="fine">Your first three are free.</span></div>
   </div>
   <div class="deskwrap">
-    <div class="frame"><iframe src="demo/lantern-door/" title="Live demo: Lantern Door, a story where the reader chooses" loading="eager"></iframe></div>
+    <div class="frame"><iframe src="demo/lantern-door/?embed=1" title="Live demo: Lantern Door, a story where the reader chooses" loading="eager"></iframe></div>
     <p class="cap">A live book, not a picture of one. Tap Begin and choose.</p>
   </div>
 </section>
@@ -220,7 +220,7 @@ footer{padding:48px var(--gut) 64px;border-top:1px solid var(--ink);display:flex
       <h3>Claude Code</h3>
       <p>Add the plugin, then type <b>/make-book</b>. The agent interviews you, writes, builds, checks and gives you the link.</p>
       <pre class="code">/plugin marketplace add executiveusa/bookee
-/plugin install bookee
+/plugin install bookee@bookee
 /make-book</pre>
     </div>
     <div>
@@ -255,7 +255,7 @@ node bin/bookmaker.mjs build books/mine</pre>
   <h3>What about the pictures and music?</h3><p>Each picture or song is a named slot. Drop the file in and rebuild. Until then the book shows a clearly labelled placeholder.</p>
 </section>
 
-<footer><span><b style="font-family:var(--d)">Bookee</b>. Built by thepaulieffect 2026.</span><span>Fonts: Bodoni Moda and Newsreader, SIL Open Font License. Story engine: inkjs and ink, MIT.</span></footer>
+<footer><span><b style="font-family:var(--d)">Bookee</b> v1.0.1. Built by thepaulieffect 2026.</span><span>Fonts: Bodoni Moda and Newsreader, SIL Open Font License. Story engine: inkjs and ink, MIT.</span></footer>
 
 <script>
 (function(){

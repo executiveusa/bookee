@@ -3,7 +3,7 @@
   "use strict";
   var B = window.__BOOK__;
   var LS = (function () { try { localStorage.setItem("pbm", "1"); localStorage.removeItem("pbm"); return localStorage; } catch (e) { return { getItem: function () { return null; }, setItem: function () {}, removeItem: function () {} }; } })();
-  var key = function (k) { return "pbm:" + B.id + ":" + k; };
+  var key = function (k) { return "pbm:" + B.id + (window.self !== window.top ? ":embed" : "") + ":" + k; };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var el = function (t, c, h) { var e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
@@ -81,7 +81,11 @@
     story = new inkjs.Story(B.ink);
     var saved = null; try { saved = JSON.parse(LS.getItem(key("save")) || "null"); } catch (e) {}
     try { endings = JSON.parse(LS.getItem(key("endings")) || "{}"); } catch (e) { endings = {}; }
-    if (saved && saved.beats && saved.beats.length) { beats = saved.beats; S.v = saved.v || 0; }
+    if (saved && saved.beats && saved.beats.length) { beats = saved.beats; S.v = saved.v || 0;
+      if (saved.version !== 2) {
+        var old = [{k:"cover"}]; beats.forEach(function(b,i){var ch=chunkParas(b);ch.forEach(function(c,j){old.push({k:"text",b:i,c:j});});if((ch.length+1)%2===1)old.push({k:"orn",b:i});old.push({k:"ask",b:i});});
+        var prior=old[S.v] || old[0]; rebuildAdv(); var migrated=pages.findIndex(function(p){return prior.k==="orn"?p.k==="ask"&&p.b===prior.b:p.k===prior.k&&p.b===prior.b&&(p.k!=="text"||p.c===prior.c);}); S.v=Math.max(0,migrated);
+      } }
     else { beats = [runInk(story)]; S.v = 0; }
     rebuildAdv();
   }
@@ -100,12 +104,11 @@
     beats.forEach(function (b, i) {
       var ch = chunkParas(b);
       ch.forEach(function (c, j) { pages.push({ k: "text", b: i, c: j, paras: c }); });
-      if ((ch.length + 1) % 2 === 1) pages.push({ k: "orn", b: i });
       pages.push({ k: "ask", b: i });
     });
   }
   function firstPageOf(bi) { for (var i = 0; i < pages.length; i++) if (pages[i].b === bi) return i; return 0; }
-  function persist() { if (ADV) { LS.setItem(key("save"), JSON.stringify({ beats: beats, v: S.v })); LS.setItem(key("endings"), JSON.stringify(endings)); } else LS.setItem(key("pos"), String(S.v / Math.max(1, pages.length))); }
+  function persist() { if (ADV) { LS.setItem(key("save"), JSON.stringify({ version: 2, beats: beats, v: S.v })); LS.setItem(key("endings"), JSON.stringify(endings)); } else LS.setItem(key("pos"), String(S.v / Math.max(1, pages.length))); }
   function choose(bi, k) {
     if (S.busy) return;
     story.state.LoadJson(beats[bi].state);
@@ -201,7 +204,7 @@
     var last = pages.length - 1, vis = S.up === 2 ? Math.min(last, S.v + 1) : S.v;
     $("#bPrev").disabled = S.v <= 0;
     var nextOff = S.v >= last || (S.up === 2 && S.v + 1 >= last);
-    if (ADV) { var cur = pages[Math.min(S.v + (S.up === 2 ? 1 : 0), last)]; if (cur && cur.k === "ask") nextOff = true; if (S.v === 0) nextOff = false; }
+    if (ADV) { var cur = pages[Math.min(S.v + (S.up === 2 ? 1 : 0), last)]; if ((cur && cur.k === "ask") || (pages[S.v] && pages[S.v].k === "ask")) nextOff = true; if (S.v === 0) nextOff = false; }
     $("#bNext").disabled = nextOff;
     var lab;
     if (ADV) { var step = S.v === 0 ? 0 : Math.ceil((S.v) / 2); lab = (S.v === 0 ? "Cover" : "Step " + (pages[Math.min(S.v, last)].b + 1)) + (B.endingsTotal ? " \u00b7 Endings " + Object.keys(endings).length + "/" + B.endingsTotal : ""); $("#pbar").style.width = (Object.keys(endings).length / Math.max(1, B.endingsTotal || 1) * 100) + "%"; }
@@ -271,7 +274,7 @@
     var ol = $("#tocList"); ol.innerHTML = "";
     if (ADV) {
       var li = el("li"); li.innerHTML = '<button data-go="0"><span>Cover</span></button>'; ol.appendChild(li);
-      beats.forEach(function (b, i) { var l = el("li"); l.innerHTML = '<button data-go="' + (1 + 2 * i) + '"><span>Step ' + (i + 1) + (b.chapter ? " \u2013 " + esc(b.chapter) : "") + "</span></button>"; ol.appendChild(l); });
+      beats.forEach(function (b, i) { var l = el("li"); l.innerHTML = '<button data-go="' + firstPageOf(i) + '"><span>Step ' + (i + 1) + (b.chapter ? " \u2013 " + esc(b.chapter) : "") + "</span></button>"; ol.appendChild(l); });
       var f = Object.keys(endings);
       $("#tocEnd").textContent = (B.endingsTotal ? f.length + " of " + B.endingsTotal + " endings found" : f.length + " endings found") + (f.length ? ": " + f.join(", ") : "");
     } else {

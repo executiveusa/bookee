@@ -67,6 +67,7 @@ async function readEpub(buf, name) {
 
 async function handleFile(file) {
   if (!file) return;
+  chapters = []; meta = {title:"",author:""}; $("step2").style.display="none"; $("preview").innerHTML=""; $("title-in").value=""; $("author-in").value="";
   if (file.size > 25 * 1024 * 1024) { setStatus("That file is " + Math.round(file.size / 1048576) + " MB. Keep it under 25 MB - bigger books need the full plugin."); return; }
   setStatus("Reading " + file.name + " ...");
   try {
@@ -78,10 +79,11 @@ async function handleFile(file) {
     $("preview").innerHTML = chapters.map((c, i) => "<li><b>" + esc(c.title) + "</b> <span>" + Math.round(c.html.length / 6) + " words</span></li>").join("");
     $("step2").style.display = "block";
     setStatus("Found " + r.parts + " sections from " + r.pages + " " + (isEpub ? "spine items" : "pages") + ".");
-  } catch (e) { setStatus("Could not read that file: " + e.message); }
+  } catch (e) { chapters=[]; $("step2").style.display="none"; setStatus("Could not read that book. Choose a valid, unencrypted EPUB or a PDF with selectable text."); }
 }
 
 async function buildBook() {
+  if (!chapters.length) { setStatus("Choose a readable PDF or EPUB first."); return; }
   setStatus("Setting type...");
   const tpl = await (await fetch("template.html")).text();
   const lines = tpl.split("\n");

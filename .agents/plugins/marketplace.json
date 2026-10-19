@@ -7,7 +7,8 @@
     {
       "name": "bookee",
       "source": "./",
-      "description": "Interview, plan, write, typeset and verify ebooks, adventures and flipbook proposals."
+      "description": "Interview, plan, write, typeset and verify ebooks, adventures and flipbook proposals.",
+      "version": "1.0.1"
     }
   ],
   "owner": {

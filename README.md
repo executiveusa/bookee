@@ -6,7 +6,7 @@ Bookee turns a short interview into a real book: set in proper
 type, checked page by page, and delivered as one self-contained HTML file
 that turns its pages on any phone. No app, no account, no designer.
 
-## Three kinds of book, one engine
+## 3 kinds of books
 
 - **Guide** - a regular ebook from `book.md`. Chapters on fresh pages, a
   contents list that reaches everywhere, type that stays readable at any size.
@@ -16,8 +16,7 @@ that turns its pages on any phone. No app, no account, no designer.
 - **Proposal** - a business proposal from `proposal.json`, rendered as a
   hardcover flipbook with the vendored renderer (vendored under
   `engine/vendor/flipbook-renderer`, see VENDORED.md). Leather cover, contents,
-  plan, offer, investment and signature pages - the document that wins the
-  job, not another PDF.
+  plan, offer, investment and signature pages.
 
 Every book is one HTML file with the fonts embedded (Bodoni Moda +
 Newsreader, SIL OFL). It runs from a link, a USB stick, or any static host.
@@ -35,15 +34,14 @@ Neutral samples in `examples/`: sourdough-weekend (guide), lantern-door
 
 ## Run it inside your agent
 
-**Claude Code** - the plugin passes `claude plugin validate --strict`:
+**Claude Code** - install with `claude plugin marketplace add executiveusa/bookee && claude plugin install bookee@bookee`. The plugin passes `claude plugin validate --strict`:
 `/make-book` interviews you, writes, checks and builds.
 
 **Codex** - the repo carries `.agents/plugins/marketplace.json`; add it as a
 local or git marketplace and `codex plugin add bookee@bookee`.
 The same flow also works from plain AGENTS.md instructions.
 
-Author name in `.claude-plugin/plugin.json` is a placeholder pending the
-owner's public author/publisher name.
+Built by thepaulieffect.
 
 ## What is deliberately not here
 
@@ -59,5 +57,7 @@ See AGENTS.md for the working agreement.
 Built by thepaulieffect 2026
 
 ## Kindle (KDP) export
+
+Set your author name in `book.md` or `book.json` before export. Empty guide chapters must be filled before building or exporting.
 
 `bookmaker export kindle my-book --out dist` writes a folder with a KDP-ready reflowable EPUB 3 (epubcheck-clean), a marketing cover at Amazon's spec (2560 x 1600 px JPEG, RGB, 300 DPI), and a publish sheet with the steps. KDP upload happens in your own KDP account - Bookee does not publish for you. Format rules follow Amazon's current pages: accepted formats (kdp.amazon.com/help/topic/G200634390), cover guidelines (kdp.amazon.com/help/topic/G6GTK3T3NUHKLEFX).
