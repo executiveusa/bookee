@@ -7,7 +7,7 @@ import { validateInk } from "../lib/validate.mjs";
 import { lintGuide, lintAdventure } from "../lib/lint.mjs";
 import { plan } from "../lib/outline.mjs";
 import { loadProposal, checkProposal } from "../lib/proposal.mjs";
-if (process.argv.includes("--version")) { console.log("bookee 1.0.1"); process.exit(0); }
+if (process.argv.includes("--version")) { console.log("bookee 1.0.2"); process.exit(0); }
 const [cmd, ...rest] = process.argv.slice(2);
 const flag = (n, d) => { const i = rest.indexOf("--" + n); return i >= 0 ? rest[i + 1] : d; };
 const target = rest.find((a, i) => !a.startsWith("--") && !(rest[i - 1] || "").startsWith("--"));

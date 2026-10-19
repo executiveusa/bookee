@@ -61,3 +61,9 @@ Built by thepaulieffect 2026
 Set your author name in `book.md` or `book.json` before export. Empty guide chapters must be filled before building or exporting.
 
 `bookmaker export kindle my-book --out dist` writes a folder with a KDP-ready reflowable EPUB 3 (epubcheck-clean), a marketing cover at Amazon's spec (2560 x 1600 px JPEG, RGB, 300 DPI), and a publish sheet with the steps. KDP upload happens in your own KDP account - Bookee does not publish for you. Format rules follow Amazon's current pages: accepted formats (kdp.amazon.com/help/topic/G200634390), cover guidelines (kdp.amazon.com/help/topic/G6GTK3T3NUHKLEFX).
+
+### Offline-ready plugin runtime
+
+The installed CLI includes the Marked markdown parser the Ink runtime/compiler, and a prebuilt proposal browser renderer. No `npm install` step is needed to plan, scaffold, check, or build guide, adventure and proposal books. This also works in the Codex plugin cache, where the installer does not install dependencies. Node.js 20 or newer is required. Kindle cover export additionally uses Python 3 and Pillow. To rebuild the proposal renderer after editing its loader, run `node scripts/build-proposal-runtime.mjs` with the development dependencies installed. Development/build scripts still use the npm dependencies in package.json.
+
+Vendored Marked provenance, hash and license: `vendor/marked/`.

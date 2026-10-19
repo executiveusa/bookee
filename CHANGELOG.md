@@ -1,5 +1,16 @@
 # Bookee releases
 
+## v1.0.2 - 2026-10-19
+Patch for clean Codex plugin installations.
+
+- Vendor the unmodified Marked 18.0.14 runtime with its license and SHA-256 provenance.
+- Ship a prebuilt proposal renderer with dependency licenses; no runtime esbuild, React install, or npm network fetch.
+- Use the same local parser for guide, adventure and proposal paths, without a first-run npm install or network request.
+- Add an isolated plugin-payload regression that has no node_modules and cannot reach ancestor dependencies.
+- Keep robots.txt unchanged pending owner decision.
+
+Release/deployment/rollback metadata: releases/v1.0.2.json.
+
 ## v1.0.1 - 2026-10-19
 Patch release for the independent review of v1.0. No new product category.
 

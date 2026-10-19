@@ -1,0 +1,33 @@
+{
+  "note": "Prebuilt proposal browser runtime. Build script requires npm development dependencies; installed plugin execution does not.",
+  "source": "engine/proposal/loader.js",
+  "loader_sha256": "b86cf96e6ab80cad8da1a17569bf36d686236a91b34a15d863f2434389a19884",
+  "runtime_sha256": "3a5118058054d6fd1abeca1d741f9020321479e290d22760b4cbbf887be8283a",
+  "dependencies": [
+    {
+      "name": "react",
+      "version": "19.3.1",
+      "license": "MIT"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.3.1",
+      "license": "MIT"
+    },
+    {
+      "name": "react-pageflip",
+      "version": "2.0.3",
+      "license": "MIT"
+    },
+    {
+      "name": "page-flip",
+      "version": "2.0.7",
+      "license": "MIT"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.28.0",
+      "license": "MIT"
+    }
+  ]
+}

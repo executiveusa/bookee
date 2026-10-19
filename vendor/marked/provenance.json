@@ -1,0 +1,9 @@
+{
+  "package": "marked",
+  "version": "18.0.14",
+  "license": "MIT",
+  "source": "https://github.com/markedjs/marked",
+  "file": "marked.esm.mjs",
+  "sha256": "528a1b88bef88fc27277e06036ce7f4afb6a220b18110ba57c09e292b24a7ce0",
+  "note": "Unmodified ESM distribution from installed marked 18.0.14, extension renamed to .mjs. Runtime import shared by all CLI paths. No first-run install, network fetch or lifecycle script."
+}
