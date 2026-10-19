@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bookee - say what you do, get a finished book</title>
+<meta name="description" content="Answer three questions. Your agent writes the draft, Bookee sets it in type, and you get an ebook that turns pages on a phone.">
+<meta name="theme-color" content="#f4edda">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/newsreader-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Bodoni Moda";font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/bodoni-moda-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Bodoni Moda";font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/bodoni-moda-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Bodoni Moda";font-weight:600;font-style:normal;font-display:swap;src:url(assets/fonts/bodoni-moda-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Bodoni Moda";font-weight:700;font-style:normal;font-display:swap;src:url(assets/fonts/bodoni-moda-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Bodoni Moda";font-weight:400;font-style:italic;font-display:swap;src:url(assets/fonts/bodoni-moda-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/newsreader-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/newsreader-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:600;font-style:normal;font-display:swap;src:url(assets/fonts/newsreader-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:italic;font-display:swap;src:url(assets/fonts/newsreader-latin-400-italic.woff2) format("woff2")}
+:root{--paper:#f4edda;--paper2:#ebe2cb;--ink:#1c1915;--soft:#4d463b;--cloth:#5a1d22;--brass:#8f6d33;--rule:rgba(28,25,21,.22);--d:"Bodoni Moda","Didot",Georgia,serif;--t:"Newsreader",Georgia,serif;--gut:clamp(20px,5vw,72px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 clamp(18px,1.25vw + 12px,21px)/1.5 var(--t);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.band{background:var(--ink);color:var(--paper);font:500 12px/1 var(--t);letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:9px 12px}
+header.nav{display:flex;align-items:center;gap:28px;padding:20px var(--gut);border-bottom:1px solid var(--rule)}
+.mark{font:italic 400 clamp(20px,2vw,26px)/1 var(--d);text-decoration:none;margin-right:auto;letter-spacing:.01em}
+.mark b{font-style:normal;font-weight:700}
+.nav a.l{font:500 13px/1 var(--t);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--soft)}
+.nav a.l:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;background:var(--cloth);color:#f6e9c8;border:1px solid var(--cloth);font:500 15px/1 var(--t);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.btn:hover{background:#6c242a}
+.btn:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--cloth);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.nav .btn{min-height:44px;padding:0 20px;font-size:13px}
+section{padding:clamp(64px,9vw,128px) var(--gut)}
+.run{font:500 12px/1 var(--t);letter-spacing:.28em;text-transform:uppercase;color:var(--brass);margin:0 0 28px;display:flex;align-items:center;gap:16px}
+.run::after{content:"";height:1px;background:var(--rule);flex:1}
+h1,h2,h3{font-family:var(--d);font-weight:500;margin:0;letter-spacing:-.015em;text-wrap:balance}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,6vw,96px);align-items:center;padding-top:clamp(40px,6vw,88px)}
+.hero h1{font-size:clamp(42px,5.8vw,88px);line-height:.98;font-weight:500}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--cloth)}
+.hero .sub{max-width:34em;margin:32px 0 36px;color:var(--soft);font-size:clamp(19px,1.5vw + 10px,24px);line-height:1.45}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:22px}
+.cta .fine{font:italic 400 17px/1.3 var(--t);color:var(--soft)}
+.deskwrap{position:relative}
+.deskwrap::before{content:"";position:absolute;inset:-26px -26px -26px 40px;background:var(--paper2);z-index:0}
+.frame{position:relative;z-index:1;aspect-ratio:13/19;width:min(100%,460px);margin-left:auto;background:#d8d0bd;box-shadow:0 30px 50px -20px rgba(40,25,10,.45),0 2px 4px rgba(40,25,10,.3)}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cap{position:relative;z-index:1;width:min(100%,460px);margin:14px 0 0 auto;font:italic 400 16px/1.35 var(--t);color:var(--soft)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink)}
+.step{padding:28px 28px 8px 0;border-right:1px solid var(--rule)}
+.step:last-child{border-right:0}
+.step+.step{padding-left:28px}
+.step .n{font:500 clamp(64px,8vw,120px)/.9 var(--d);color:var(--cloth);display:block;margin-bottom:12px}
+.step h3{font-size:clamp(24px,2.4vw,34px);line-height:1.1;margin-bottom:12px}
+.step p{margin:0 0 20px;color:var(--soft)}
+h2.big{font-size:clamp(34px,4.6vw,68px);line-height:1.02;max-width:17em;margin-bottom:56px}
+/* interview */
+.start{background:var(--ink);color:var(--paper)}
+.start .run{color:#c9a86a}.start .run::after{background:rgba(244,237,218,.22)}
+.start h2.big{margin-bottom:20px}
+.start .lede{max-width:36em;color:#d9d0b9;margin:0 0 48px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px)}
+form label{display:block;font:500 12px/1 var(--t);letter-spacing:.24em;text-transform:uppercase;color:#c9a86a;margin:0 0 10px}
+form .f{margin-bottom:28px}
+input[type=text],textarea{width:100%;background:transparent;border:0;border-bottom:1.5px solid rgba(244,237,218,.55);color:var(--paper);font:400 22px/1.4 var(--t);padding:8px 0 10px;border-radius:0;resize:vertical}
+input::placeholder,textarea::placeholder{color:rgba(244,237,218,.45);font-style:italic}
+fieldset{border:0;padding:0;margin:0 0 32px}
+fieldset legend{font:500 12px/1 var(--t);letter-spacing:.24em;text-transform:uppercase;color:#c9a86a;margin-bottom:14px;padding:0}
+form label.opt{font:400 20px/1.3 var(--t);letter-spacing:0;text-transform:none;color:var(--paper);margin:0 0 12px}
+.opt{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px;cursor:pointer;font-size:20px;line-height:1.3}
+.opt input{margin-top:6px;accent-color:#c9a86a;width:20px;height:20px}
+.start .btn{background:#e8d6ac;color:var(--ink);border-color:#e8d6ac}
+.start .btn:hover{background:#f3e6c4}
+.out{border:1px solid rgba(244,237,218,.3);padding:clamp(22px,3vw,40px);min-height:420px}
+.out .empty{color:rgba(244,237,218,.6);font-style:italic}
+.out h3{font-size:30px;margin-bottom:6px}
+.out .tgt{font:italic 400 17px/1.3 var(--t);color:#c9a86a;margin:0 0 22px}
+.out ol{list-style:none;margin:0;padding:0}
+.out li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(244,237,218,.18)}
+.out li b{font:500 28px/1 var(--d);color:#c9a86a}
+.out li strong{display:block;font:600 19px/1.2 var(--t);margin-bottom:3px}
+.out li span{color:#d9d0b9;font-size:18px;line-height:1.4}
+.cmd{margin-top:22px;background:rgba(0,0,0,.35);padding:16px 18px;font:500 15px/1.5 ui-monospace,Menlo,Consolas,monospace;color:#e8d6ac;word-break:break-word;position:relative}
+.cmd button{margin-top:12px}
+.note{font:italic 400 16px/1.4 var(--t);color:#bdb399;margin:18px 0 0}
+/* two books */
+.two{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px)}
+.vol a{display:block;text-decoration:none}
+.vol .cv{aspect-ratio:13/18;max-width:380px;background:var(--cloth);position:relative;box-shadow:0 22px 34px -18px rgba(40,25,10,.5);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:12%;color:#ebd9ae;transition:transform .25s}
+.vol a:hover .cv{transform:translateY(-6px)}
+.vol .cv::before{content:"";position:absolute;inset:7%;border:1px solid rgba(201,163,98,.55)}
+.vol .cv b{font:600 clamp(28px,3.2vw,46px)/1.05 var(--d)}
+.vol .cv i{font:italic 400 18px/1.3 var(--t);margin-top:14px;color:#d9c398}
+.vol h3{font-size:28px;margin:22px 0 6px}.vol p{max-width:30em}
+.vol p{margin:0;color:var(--soft)}
+.vol .go{display:inline-block;margin-top:12px;font:500 13px/1 var(--t);letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:4px}
+/* standard */
+.std{columns:2;column-gap:clamp(32px,6vw,96px);margin:0;padding:0;list-style:none}
+.std li{break-inside:avoid;padding:16px 0;border-top:1px solid var(--rule);display:grid;grid-template-columns:28px 1fr;gap:12px}
+.std li::before{content:"\2766";color:var(--brass)}
+.std strong{font-weight:600}
+.std small{display:block;color:var(--soft);font-size:16px;margin-top:2px}
+/* plugin */
+.code{background:var(--ink);color:#e8d6ac;padding:20px 22px;font:500 15px/1.65 ui-monospace,Menlo,Consolas,monospace;overflow:auto;margin:0 0 20px;white-space:pre}
+.plug h3{font-size:26px;margin:0 0 10px}
+.plug p{margin:0 0 14px;color:var(--soft)}
+/* pricing */
+.price{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.plan{padding:36px 32px 36px 0}.plan+.plan{padding-left:32px;border-left:1px solid var(--rule)}
+.plan h3{font-size:34px;margin-bottom:6px}
+.plan .p{font:500 clamp(44px,5vw,72px)/1 var(--d);margin:16px 0 4px}
+.plan .p small{font:italic 400 18px/1 var(--t);color:var(--soft)}
+.plan ul{padding:0;margin:20px 0 0;list-style:none}
+.plan li{padding:9px 0;border-top:1px solid var(--rule)}
+.tag{display:inline-block;font:500 11px/1 var(--t);letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--brass);color:var(--brass);padding:5px 8px;margin-left:10px;vertical-align:middle}
+/* faq */
+.faq{max-width:46em}
+.faq h3{font-size:24px;margin:34px 0 8px}
+.faq p{margin:0;color:var(--soft)}
+footer{padding:48px var(--gut) 64px;border-top:1px solid var(--ink);display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;font:400 16px/1.4 var(--t);color:var(--soft)}
+@media (max-width:900px){
+ .hero,.grid2,.two,.price{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr}.step,.step+.step{padding:24px 0;border-right:0;border-bottom:1px solid var(--rule)}
+ .std{columns:1}
+ .plan,.plan+.plan{padding:28px 0;border-left:0}.plan+.plan{border-top:1px solid var(--rule)}
+ .nav a.l{display:none}
+ .deskwrap::before{inset:-14px -14px -14px 20px}
+ .frame,.cap{margin-left:0;margin-right:auto;width:min(100%,420px)}
+}
+@media (prefers-reduced-motion:no-preference){.hero h1,.hero .sub,.cta{animation:rise .8s both}.hero .sub{animation-delay:.1s}.cta{animation-delay:.2s}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.grid2>*,.two>*,.hero>*{min-width:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style></head>
+<body>
+<div class="band">In-house preview. Not public. Demo content is placeholder.</div>
+<header class="nav">
+  <a class="mark" href="#top"><b>Bookee</b></a>
+  <a class="l" href="#how">How it works</a><a class="l" href="#books">Books</a><a class="l" href="#plugin">Plugin</a><a class="l" href="#pricing">Pricing</a>
+  <a class="btn" href="#start">Try it free</a>
+</header>
+
+<section class="hero" id="top">
+  <div>
+    <h1>Say what you do. <em>Get a finished book.</em></h1>
+    <p class="sub">Answer three questions in your own words. Your agent writes the draft, Bookee sets it in real type, and you get a book that turns its pages on a phone: a guide, a story where the reader chooses, or a hardcover proposal that wins the job.</p>
+    <div class="cta"><a class="btn" href="#start">Make my first book</a><span class="fine">Your first three are free.</span></div>
+  </div>
+  <div class="deskwrap">
+    <div class="frame"><iframe src="demo/lantern-door/" title="Live demo: Lantern Door, a story where the reader chooses" loading="eager"></iframe></div>
+    <p class="cap">A live book, not a picture of one. Tap Begin and choose.</p>
+  </div>
+</section>
+
+<section id="how">
+  <p class="run">How it works</p>
+  <h2 class="big">Three questions in. A book out.</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>You talk</h3><p>What do you do? Who is it for? What do you want them to know? Plain answers, spoken or typed.</p></div>
+    <div class="step"><span class="n">2</span><h3>Your agent writes</h3><p>Claude Code, Codex or any agent you already use drafts the chapters. We hand it the structure and the questions to answer. Every sentence it keeps is yours to change.</p></div>
+    <div class="step"><span class="n">3</span><h3>You turn the page</h3><p>One link that opens like a book on any phone. Large type, a contents list that goes everywhere, a full-screen button.</p></div>
+  </div>
+</section>
+
+<section class="start" id="start">
+  <p class="run">Start here</p>
+  <h2 class="big">Try the first step now.</h2>
+  <p class="lede">This is the real planning step. It shows the chapters your book needs and the question each one has to answer. The writing is done by your own agent in the next step.</p>
+  <div class="grid2">
+    <form id="f" novalidate>
+      <div class="f"><label for="does">What do you do?</label><input id="does" type="text" autocomplete="off" placeholder="I fix commercial kitchens"></div>
+      <div class="f"><label for="reader">Who is it for?</label><input id="reader" type="text" autocomplete="off" placeholder="new restaurant owners"></div>
+      <div class="f"><label for="say">What do you want to say?</label><textarea id="say" rows="3" placeholder="Most breakdowns are decided in the first week."></textarea></div>
+      <fieldset><legend>Kind of book</legend>
+        <label class="opt"><input type="radio" name="kind" value="guide" checked><span>A guide that teaches something</span></label>
+        <label class="opt"><input type="radio" name="kind" value="adventure"><span>A story where the reader chooses</span></label>
+        <label class="opt"><input type="radio" name="kind" value="proposal"><span>A proposal that wins the job</span></label>
+      </fieldset>
+      <button class="btn" type="submit">Plan my book</button>
+    </form>
+    <div class="out" id="out" aria-live="polite"><p class="empty">Your chapter plan will appear here.</p></div>
+  </div>
+</section>
+
+<section id="books">
+  <p class="run">Three kinds of book</p>
+  <h2 class="big">One engine. A guide, a story, or the closer.</h2>
+  <div class="two">
+    <div class="vol"><a href="demo/sourdough-weekend/"><div class="cv"><b>The Sourdough Weekend</b><i>A pocket guide to your first real loaf</i></div><h3>The guide</h3><p>Chapters that start on a fresh page, a proper contents list, text that stays readable at any size.</p><span class="go">Read the sample</span></a></div>
+    <div class="vol"><a href="demo/lantern-door/"><div class="cv"><b>Lantern Door</b><i>An adventure where you choose</i></div><h3>The adventure</h3><p>Six endings, a twist at the midpoint, and a checker that proves every ending can be reached and no page is a dead end.</p><span class="go">Play the demo</span></a></div>
+    <div class="vol"><a href="demo/acme-proposal/"><div class="cv" style="background:#111;color:#f3ead2"><b>Northwind Bakery</b><i style="color:#c9a227">A proposal, bound like a hardcover</i></div><h3>The proposal</h3><p>Cover, plan, offer, investment and signature pages in the hardcover flipbook style. The document that wins the job, not another PDF.</p><span class="go">Open the proposal</span></a></div>
+  </div>
+</section>
+
+<section id="standard" style="background:var(--paper2)">
+  <p class="run">The standard</p>
+  <h2 class="big">Set the way a book should be set.</h2>
+  <ul class="std">
+    <li><span><strong>Type chosen on purpose.</strong><small>Bodoni Moda for headings, Newsreader for text. Both open licence, embedded in the book.</small></span></li>
+    <li><span><strong>Big enough for a phone.</strong><small>Text starts large and has A- and A+. No horizontal scroll at 390 pixels wide.</small></span></li>
+    <li><span><strong>Full-screen button.</strong><small>Uses the browser's full-screen mode where it exists, and a hidden-toolbar mode where it does not.</small></span></li>
+    <li><span><strong>Contents that reach every part.</strong><small>Chapters in a guide, every step in an adventure.</small></span></li>
+    <li><span><strong>A page turn you can switch off.</strong><small>Respects reduced-motion. Sound is off until the reader asks for it.</small></span></li>
+    <li><span><strong>No dead ends, shown not promised.</strong><small>The checker plays every path and lists the endings it reached.</small></span></li>
+    <li><span><strong>Your words stay yours.</strong><small>The editor pass reports friction by page. It never rewrites your text.</small></span></li>
+    <li><span><strong>One file, any host.</strong><small>A book is a single HTML file. It also runs from a USB stick.</small></span></li>
+  </ul>
+</section>
+
+<section id="plugin" class="plug">
+  <p class="run">Where it runs</p>
+  <h2 class="big">It lives inside the agent you already use.</h2>
+  <p class="note">Status: the plugin passes Claude's strict validation and installs in Codex from the repo's marketplace manifest. The GitHub repo is private during launch review; marketplace submissions are the next step.</p>
+  <div class="grid2">
+    <div>
+      <h3>Claude Code</h3>
+      <p>Add the plugin, then type <b>/make-book</b>. The agent interviews you, writes, builds, checks and gives you the link.</p>
+      <pre class="code">/plugin marketplace add executiveusa/bookee
+/plugin install bookee
+/make-book</pre>
+    </div>
+    <div>
+      <h3>Codex and others</h3>
+      <p>Anything that reads an AGENTS.md can run it. The same steps are plain commands.</p>
+      <pre class="code">git clone executiveusa/bookee
+cd bookee &amp;&amp; npm install
+node bin/bookmaker.mjs plan --kind guide
+node bin/bookmaker.mjs check books/mine
+node bin/bookmaker.mjs build books/mine</pre>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--paper2)">
+  <p class="run">Pricing <span class="tag">Proposed</span></p>
+  <h2 class="big">Three books free. Then a flat monthly fee.</h2>
+  <div class="price">
+    <div class="plan"><h3>Trial</h3><div class="p">$0</div><small style="font:italic 400 18px/1 var(--t);color:var(--soft)">three books</small>
+      <ul><li>Full reader, nothing cut down</li><li>Hosted link for 30 days (proposal)</li><li>A small colophon line on the last page</li></ul></div>
+    <div class="plan"><h3>Studio</h3><div class="p">$19 <small>per month</small></div><small style="font:italic 400 18px/1 var(--t);color:var(--soft)">placeholder price</small>
+      <ul><li>Unlimited books, permanent links</li><li>Matching PDF (not built yet)</li><li>Your own domain, no colophon line</li></ul></div>
+  </div>
+  <p class="note" style="color:var(--soft)">Billing is not connected yet. Prices here are a proposal for review. A book is one static file, so hosting a book costs close to nothing, and the writing runs on the author's own agent.</p>
+</section>
+
+<section class="faq" id="faq">
+  <p class="run">Questions</p>
+  <h3>Who writes the book?</h3><p>Your agent drafts it from your answers. You read every page and change what you want. The tool lists problems page by page and leaves your sentences alone.</p>
+  <h3>What does the reader need?</h3><p>A link and a phone. No app, no account.</p>
+  <h3>Can I put it on my own server?</h3><p>Yes. The folder is static files. Copy it anywhere that serves web pages.</p>
+  <h3>What about the pictures and music?</h3><p>Each picture or song is a named slot. Drop the file in and rebuild. Until then the book shows a clearly labelled placeholder.</p>
+</section>
+
+<footer><span><b style="font-family:var(--d)">Bookee</b>. Say what you do, get a finished book.</span><span>Fonts: Bodoni Moda and Newsreader, SIL Open Font License. Story engine: inkjs and ink, MIT.</span></footer>
+
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  function plan(a){
+    var q=function(s){return String(s||"").trim().replace(/\s+/g," ").slice(0,240)};
+    var does=q(a.does),reader=q(a.reader),say=q(a.say);
+    if(a.kind==="proposal")return{target:"7 pages: leather cover, problem, plan, offer, investment, signatures",parts:[
+      ["The problem","What is broken for the client, in their words? One page, no jargon."],
+      ["The plan","Three stages with dates. What happens in the first week?"],
+      ["The offer","One offer, not a menu. What do they get, and by when?"],
+      ["Proof","One client, one number, one before and after. Names only if they agree."],
+      ["Investment","The price on its own page, with the payment structure underneath."],
+      ["Signatures","Who signs for each side, with a date line. Make saying yes easy."]]};
+    if(a.kind==="adventure")return{target:"30+ pages, 5 to 7 endings, one twist at the midpoint",parts:[
+      ["The hook","Who is the hero, and what do they want tonight? Keep it to what "+(reader?"your reader":"a reader")+" can picture in one line."],
+      ["The first choice","Three doors. Make one funny, one brave, one sneaky. All three must lead somewhere good."],
+      ["The middle",'Where does what you want to say land? You said: "'+(say||"...")+'". Hide it in the story, not in a speech.'],
+      ["The twist","What does the reader believe that turns out to be wrong? Plant it early, reveal it late."],
+      ["The big choice","One decision with a real cost. No choice that is obviously right."],
+      ["The endings","Five to seven. One best, one funny, one that makes them go back and try again."]]};
+    return{target:"7 chapters, about 12 to 30 printed pages",parts:[
+      ["Who this is for","Describe "+(reader||"your reader")+" on the day they most need this. One real person, not a type."],
+      ["What goes wrong",(does?"You work on: "+does+". ":"")+"List the three mistakes you see most often."],
+      ["Your method","Walk through one real job from start to finish, in the order you did it."],
+      ["What you want to say",'Your words: "'+(say||"...")+'". Which chapter proves it? Put the proof there.'],
+      ["A case","One client, one number, one before and after. Names only if they agree."],
+      ["The checklist","What can the reader do in the next ten minutes? Five lines at most."],
+      ["About you","Three sentences, in your voice, with how to reach you."]]};
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  $("#f").addEventListener("submit",function(e){
+    e.preventDefault();
+    var a={does:$("#does").value,reader:$("#reader").value,say:$("#say").value,kind:document.querySelector("input[name=kind]:checked").value};
+    if(!a.does.trim()&&!a.say.trim()){$("#out").innerHTML='<p class="empty">Add at least what you do or what you want to say, then try again.</p>';$("#does").focus();return}
+    var p=plan(a),h='<h3>'+(a.kind==="adventure"?"A story where the reader chooses":a.kind==="proposal"?"A proposal in seven pages":"A guide in seven chapters")+'</h3><p class="tgt">'+esc(p.target)+'</p><ol>';
+    p.parts.forEach(function(x,i){h+='<li><b>'+(i+1)+'</b><div><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span></div></li>'});
+    var cmd='/make-book kind='+a.kind+' does="'+a.does.trim().replace(/"/g,"'")+'" reader="'+a.reader.trim().replace(/"/g,"'")+'" say="'+a.say.trim().replace(/"/g,"'")+'"';
+    h+='</ol><div class="cmd" id="cmd">'+esc(cmd)+'<br><button type="button" class="btn" id="cp" style="min-height:44px;padding:0 18px;font-size:13px">Copy command</button></div><p class="note">Paste it into Claude Code or Codex to start the writing. This preview only plans. It does not write your book.</p>';
+    $("#out").innerHTML=h;
+    $("#cp").onclick=function(){var t=cmd;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){$("#cp").textContent="Copied"},function(){var r=document.createRange();r.selectNodeContents($("#cmd"));var s=getSelection();s.removeAllRanges();s.addRange(r);$("#cp").textContent="Selected. Press copy."})};
+    $("#out").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"});
+  });
+})();
+</script>
+</body></html>

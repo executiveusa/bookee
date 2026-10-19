@@ -1,0 +1,45 @@
+{
+  "id": "acme-proposal",
+  "title": "Northwind Bakery - Growth Proposal",
+  "brand": "ACME STUDIO",
+  "provider": "Acme Studio",
+  "client": "Northwind Bakery Co",
+  "date": "2026-01-15",
+  "pages": [
+    {
+      "title": "Cover",
+      "kind": "cover front-cover",
+      "md": ""
+    },
+    {
+      "title": "The problem",
+      "kicker": "WHY",
+      "md": "# Hard to find, easy to love\n\nNorthwind Bakery makes bread people drive across town for, but new neighbors cannot find it on Google. Foot traffic depends on regulars, and the morning rush never reaches the office district two blocks away."
+    },
+    {
+      "title": "The plan",
+      "kicker": "WHAT",
+      "md": "# Sixty days, three stages\n\n**Days 1-20** - Fix and build. Google profile, photos, menu listings, one landing page.\n\n**Days 21-40** - Run and improve. Weekly posts, office-district lunch offer, review replies.\n\n**Days 41-60** - Measure and hand over. Compare visibility, document everything, hand you the keys."
+    },
+    {
+      "title": "The offer",
+      "kicker": "OFFER",
+      "md": "# One offer per campaign\n\nWho -> Problem -> Offer -> Value -> Proof -> CTA.\n\nFirst campaign: the office-district lunch run. One clear offer, one landing page, one way to order."
+    },
+    {
+      "title": "Investment",
+      "kind": "proposal-page legal-page",
+      "md": "## $10,000\n\nProfessional services.\n\n**$5,000** - 50% at signing\n\n**$2,500** - 25% on Day 30\n\n**$2,500** - 25% on completion, after all deliverables are handed over."
+    },
+    {
+      "title": "Signatures",
+      "kind": "proposal-page legal-page",
+      "md": "# Signatures\n\nBy signing below, the parties accept this proposal.\n\n**ACME STUDIO** - Name: ______  Signature: ______  Date: ______\n\n**NORTHWIND BAKERY CO** - Name: ______  Signature: ______  Date: ______"
+    },
+    {
+      "title": "End",
+      "kind": "back-cover",
+      "md": ""
+    }
+  ]
+}

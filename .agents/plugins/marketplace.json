@@ -1,0 +1,7 @@
+{
+  "name": "bookee",
+  "interface": { "displayName": "Bookee" },
+  "plugins": [
+    { "name": "bookee", "source": "./", "description": "Interview, plan, write, typeset and verify ebooks, adventures and flipbook proposals." }
+  ]
+}

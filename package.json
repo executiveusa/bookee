@@ -1,0 +1,29 @@
+{
+  "name": "bookee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/newsreader": "^5.3.0",
+    "inkjs": "^2.4.0",
+    "marked": "^18.0.14",
+    "puppeteer-core": "^25.12.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-pageflip": "^2.0.3"
+  },
+  "bin": {
+    "bookmaker": "bin/bookmaker.mjs",
+    "bookee": "bin/bookee.mjs"
+  }
+}

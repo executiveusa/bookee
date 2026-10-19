@@ -1,0 +1,10 @@
+{
+  "name": "book-title-card",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.113 preview",
+    "check": "npx --yes hyperframes@0.8.113 check",
+    "render": "npx --yes hyperframes@0.8.113 render"
+  }
+}
