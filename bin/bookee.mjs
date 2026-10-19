@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { buildHtml, loadBook, slugify } from "../lib/build.mjs";
+import { exportKindle } from "../lib/kindle.mjs";
 import { validateInk } from "../lib/validate.mjs";
 import { lintGuide, lintAdventure } from "../lib/lint.mjs";
 import { plan } from "../lib/outline.mjs";
@@ -68,7 +69,15 @@ if (cmd === "plan") {
   }
   console.log("note: lint reports only. It never changes your words.");
   process.exit(bad);
-} else if (cmd === "build") {
+} else if (cmd === "export" && rest[0] === "kindle") {
+  const sub = rest.slice(1);
+  const dir = sub.find((a, i) => !a.startsWith("--") && !(sub[i - 1] || "").startsWith("--"));
+  if (!dir) { console.log(usage); process.exit(1); }
+  const r = exportKindle(dir, flag("out", "dist"));
+  console.log(`kindle export -> ${r.epubPath} (${r.chapters} chapters, cover.jpg + KINDLE-PUBLISH.txt)`);
+  process.exit(0);
+}
+if (cmd === "build") {
   if (!target) { console.log(usage); process.exit(1); }
   const out = flag("out", "dist");
   const { html, model } = buildHtml(target);
