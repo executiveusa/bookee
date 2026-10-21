@@ -7,10 +7,12 @@ const withHome = (html) => html.replace("</body></html>", homeBtn + "</body></ht
 fs.rmSync(out, { recursive: true, force: true }); fs.mkdirSync(path.join(out, "assets/fonts"), { recursive: true });
 fs.copyFileSync("site-src/index.html", path.join(out, "index.html"));
 for (const f of fs.readdirSync("assets/fonts")) fs.copyFileSync("assets/fonts/" + f, path.join(out, "assets/fonts", f));
+const demoIds = [];
 for (const d of ["sourdough-weekend", "lantern-door", "acme-proposal"]) {
   const { html, model } = buildHtml("examples/" + d);
   fs.mkdirSync(path.join(out, "demo", model.id), { recursive: true });
   fs.writeFileSync(path.join(out, "demo", model.id, "index.html"), withHome(html));
+  demoIds.push(model.id);
 }
 
 // Upload page: template book built once, swapped client-side (no server round-trip).
@@ -25,5 +27,8 @@ for (const d of ["sourdough-weekend", "lantern-door", "acme-proposal"]) {
   fs.copyFileSync("site-src/upload.js", path.join(out, "upload", "upload.js"));
   fs.rmSync(tmp, { recursive: true, force: true });
 }
-fs.writeFileSync(path.join(out, "robots.txt"), "User-agent: *\nDisallow: /\n");
+const SITE = "https://bookee-iota.vercel.app";
+fs.writeFileSync(path.join(out, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: " + SITE + "/sitemap.xml\n");
+const siteUrls = ["/", "/upload/", ...demoIds.map((id) => "/demo/" + id + "/")];
+fs.writeFileSync(path.join(out, "sitemap.xml"), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + siteUrls.map((u) => "  <url><loc>" + SITE + u + "</loc></url>").join("\n") + "\n</urlset>\n");
 console.log("site built ->", out);
